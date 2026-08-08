@@ -81,6 +81,8 @@ The environment consists of two main components: the Maze World and the Habitat 
 - Activity: Represents the mouse's need for physical activity. Increases over time and decreases when the mouse engages in movement or play.
 - Social: Represents the mouse's need for social interaction. Increases over time and decreases when the mouse interacts with other mice.
 - Curiosity: Represents the mouse's desire to explore and investigate its environment. Increases over time and decreases when the mouse engages in exploratory behavior.
+- Discomfort: Represents the mouse's need for a comfortable environment. Increases over time and decreases when the mouse is in a comfortable setting, such as a well-maintained nest or bedding area.
+- Sleep: Represents the mouse's need for rest and sleep. Increases over time and decreases when the mouse is in a resting or sleeping state.
 
 
 
@@ -152,6 +154,8 @@ class GameObject:
     def __init__(self):
         self.id = "0x000000"
         self.type = None
+        self.generate = False # Whether to generate the object at the game start trigger or mouse action trigger.
+        self.quantity = 0 # Number of instances of this object to generate when triggered.
         self.available_actions = []
         self.properties = {
             "type": None, # Type of the object (e.g., "food", "bedding_material", "waste", etc.)
@@ -177,7 +181,7 @@ class GameObject:
 ```
 
 ```json
-// objects.json
+// Example game objects JSON file: objects.json
 {
     "tile": {
         "available_actions": ["examine", "mark", "relieve"],
